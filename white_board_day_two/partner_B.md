@@ -199,7 +199,7 @@ class Node
 
   # -- Assume nodes have a value, and a attr_reader on value
   # -- Also, assume there are working parent/child-related methods for Node
-  def dfs(, &prc)
+  def dfs(target, &prc)
     raise "Must give a proc or target" if prc.nil?
 
     return self if prc.call(self)

@@ -107,5 +107,36 @@ end
 class Motorcycle
 
 ```
-        
 
+
+dfs assume there is a node class
+
+takes in a value on initialize
+
+starting at root, node it takes a target or proc
+
+
+```rb
+
+
+class Node
+
+
+    def dfs(target = nil, &prc)
+        raise "Need a proc or target" if target.nil? && prc.nil?
+        prc ||= Proc.new { |node| target == node.value }
+
+        return self if prc.call(self)
+
+        self.children.each do |child|
+            result = child.dfs(&prc)
+            return result unless result.nil?
+        end
+        nil
+    end
+
+
+end
+
+
+```

@@ -34,3 +34,22 @@ class User
 
   end
 end
+
+class Node
+  def bfs(target, &prc)
+    raise "Proc or target not given" if prc.nil? || target.nil?
+    prc ||= Proc.new { |node| node.value == target }
+
+    queue = [self]
+
+    while !queue.empty?
+      dequeue = queue.shift
+      return dequeue if prc.call(dequeue)
+      queue += dequeue.children
+    end
+
+    nil
+  end
+
+
+end
